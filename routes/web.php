@@ -11,12 +11,25 @@
 |
 */
 
-Route::get('/template', function () {
-    return view('template');
-});
+Route::get('demo', function () {
+    return view('demo');
+})->name('demo-template');
+
 Route::get('/', function () {
-    return view('layout.contain');
-});
+    return view('dashboard.index');
+})->name('dashboard');
+
+Route::get('users', function (){
+    return view('users.index');
+})->name('users');
+
+Route::get('order', function (){
+    return view('order.index');
+})->name('order');
+
+Route::get('pay', function () {
+    return view('pay.index');
+})->name('pay');
 
 Auth::routes();
 
