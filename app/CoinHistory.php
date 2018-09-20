@@ -13,4 +13,13 @@ class CoinHistory extends Model
         'id', 'coins', 'id_user'
     ];
     public $incrementing = true;
+
+    public function store($data)
+    {
+        $coinHistory = $this::create([
+            'coins' => $data['coins'],
+            'id_user' => $data['id_user']
+        ]);
+        return $coinHistory;
+    }
 }

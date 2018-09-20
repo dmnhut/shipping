@@ -13,4 +13,13 @@ class UserRole extends Model
         'id', 'id_user', 'id_role'
     ];
     public $incrementing = true;
+
+    public function store($data)
+    {
+        $userRole = $this::create([
+            'id_user'=>$data['id_user'],
+            'id_role'=>helpers::$ROLE['USER']
+        ]);
+        return $userRole;
+    }
 }

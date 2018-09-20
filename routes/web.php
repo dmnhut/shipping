@@ -19,17 +19,15 @@ Route::get('/', function () {
     return view('dashboard.index');
 })->name('dashboard');
 
-Route::get('users', function (){
-    return view('users.index');
-})->name('users');
+Route::get('users', 'UserController@index')->name('users');
 
-Route::get('order', function (){
+Route::get('order', function () {
     return view('order.index');
 })->name('order');
 
-Route::get('pay', function () {
-    return view('pay.index');
-})->name('pay');
+Route::get('pay', 'PayController@index')->name('pay');
+# POST: pay/recharge
+Route::get('pay/recharge', 'PayController@recharge')->name('pay.recharge');
 
 Auth::routes();
 

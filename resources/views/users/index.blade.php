@@ -12,28 +12,23 @@
         <table class="striped">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Item Name</th>
-                <th>Item Price</th>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Tên tài khoản</th>
+                <th>Giới tính</th>
             </tr>
             </thead>
-
             <tbody>
-            <tr>
-                <td>Alvin</td>
-                <td>Eclair</td>
-                <td>$0.87</td>
-            </tr>
-            <tr>
-                <td>Alan</td>
-                <td>Jellybean</td>
-                <td>$3.76</td>
-            </tr>
-            <tr>
-                <td>Jonathan</td>
-                <td>Lollipop</td>
-                <td>$7.00</td>
-            </tr>
+            @foreach($data as $item)
+                <tr>
+                    <td>{{$item->name}}</td>
+                    <td>{{$item->email}}</td>
+                    <td>{{$item->phone}}</td>
+                    <td>{{$item->nickname}}</td>
+                    <td>{{$item->sex}}</td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
