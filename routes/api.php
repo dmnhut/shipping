@@ -16,6 +16,15 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::group(['prefix' => 'user'], function () {
     Route::post('store', 'UserController@store');
+});
+
+Route::group(['prefix' => 'order'], function () {
+    Route::post('store', 'OrderController@store');
+});
+
+Route::group(['prefix' => 'pay'], function () {
+    Route::post('recharge', 'PayController@recharge');
 });
