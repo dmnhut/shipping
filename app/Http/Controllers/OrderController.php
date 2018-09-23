@@ -2,9 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    //
+    protected $order;
+
+    public function __construct()
+    {
+        $this->order = new Order();
+    }
+
+    public function index()
+    {
+        $data = $this->order->list();
+        return view('order.index', compact('data'));
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->all();
+        $order = $this->order->store($data);
+        return $order;
+    }
 }
