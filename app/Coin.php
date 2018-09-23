@@ -53,6 +53,7 @@ class Coin extends Model
             ->where('coin_log.id_pay', helpers::$COIN_PAY['RECHARGE'])
             ->orderby('coin_log.created_at', 'desc')
             ->get([
+                'coin_log.id as id_coin_log',
                 'users.name as name',
                 'users.phone as phone',
                 'users.email as email',
