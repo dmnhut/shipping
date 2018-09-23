@@ -36,6 +36,7 @@ class User extends Authenticatable
             ->where('user_role.id_role', helpers::$ROLE['USER'])
             ->orderby('users.name', 'asc')
             ->get([
+                'users.id as id',
                 'users.name as name',
                 'users.email as email',
                 'users.phone as phone',
