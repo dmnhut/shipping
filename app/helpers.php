@@ -28,6 +28,10 @@ class helpers
     ];
     public static $COINS_INIT = 0;
     public static $COIN_PAY = ['RECHARGE' => 0, 'FEES' => 1, 'WAGE' => 2];
+    public static $MESSAGE_LOGIN = [
+        'Số điện thoại chưa đúng',
+        'Mật khẩu chưa đúng',
+    ];
 
     public static function isActive($name)
     {

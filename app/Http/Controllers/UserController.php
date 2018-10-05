@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Coin;
 use App\CoinHistory;
+use App\helpers;
 use App\User;
 use App\UserProfile;
 use App\UserRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -44,5 +46,29 @@ class UserController extends Controller
         ];
         $result = $this->user->store($data, $container);
         return $result;
+    }
+
+    public function login(Request $request)
+    {
+        $input = $request->all();
+        $data = $this->user::where('phone', $input['phone'])->first();
+        if (empty($data)) {
+            return [
+                'status' => false,
+                'message' => helpers::$MESSAGE_LOGIN[0]
+            ];
+        } else {
+            if (Hash::check($input['password'], $data['password'])) {
+                return [
+                    'status' => true,
+                    'data' => $data
+                ];
+            } else {
+                return [
+                    'status' => false,
+                    'message' => helpers::$MESSAGE_LOGIN[1]
+                ];
+            }
+        }
     }
 }
