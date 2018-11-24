@@ -10,6 +10,7 @@
 namespace App;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class helpers
 {
@@ -41,5 +42,24 @@ class helpers
     public static function genCodeOrder()
     {
         return 'TT' . date('y') . date('m') . date('d') . date('H') . date('i') . date('s');
+    }
+
+    public static function isRole($name)
+    {
+        $role = new Role();
+        $userRole = new UserRole();
+        if (empty(Auth::user())) {
+            return false;
+        } else {
+            try {
+                if ($role->getName($userRole->getIdRole(Auth::user()->id)) === $name) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (\Exception $e) {
+                return false;
+            }
+        }
     }
 }

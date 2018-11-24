@@ -15,16 +15,19 @@ Route::get('demo', function () {
     return view('demo');
 })->name('demo-template');
 
-Route::get('/', function () {
-    return view('dashboard.index');
-})->name('dashboard');
-
-Route::get('users', 'UserController@index')->name('users');
-
-Route::get('order', 'OrderController@index')->name('order');
-
-Route::get('pay', 'PayController@index')->name('pay');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'admin'], function()
+{
+    Route::get('/', function () {
+        return view('dashboard.index');
+    })->name('dashboard');
+
+    Route::get('users', 'UserController@index')->name('users')->middleware('auth');
+
+    Route::get('order', 'OrderController@index')->name('order')->middleware('auth');
+
+    Route::get('pay', 'PayController@index')->name('pay')->middleware('auth');
+
+    Route::get('logout', 'HomeController@logout')->name('logout');
+});

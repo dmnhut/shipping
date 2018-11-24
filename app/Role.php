@@ -10,7 +10,12 @@ class Role extends Model
     protected $primaryKey = 'id';
     protected $keyType = 'varchar';
     protected $fillable = [
-        'id', 'name'  
+        'id', 'name'
     ];
     public $incrementing = true;
+
+    public function getName($id)
+    {
+        return $this::where('id', $id)->first()->name;
+    }
 }

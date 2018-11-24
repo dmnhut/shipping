@@ -17,9 +17,14 @@ class UserRole extends Model
     public function store($data)
     {
         $userRole = $this::create([
-            'id_user'=>$data['id_user'],
-            'id_role'=>helpers::$ROLE['USER']
+            'id_user' => $data['id_user'],
+            'id_role' => helpers::$ROLE['USER']
         ]);
         return $userRole;
+    }
+
+    public function getIdRole($id)
+    {
+        return $this::where('id_user', $id)->first()->id_role;
     }
 }

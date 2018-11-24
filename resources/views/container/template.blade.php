@@ -78,7 +78,7 @@
                     <div class="divider"></div>
                 </li>
                 <li>
-                    <a href="#"><i class="material-icons">exit_to_app</i>
+                    <a href="{{ route('logout') }}"><i class="material-icons">exit_to_app</i>
                         Đăng xuất
                     </a>
                 </li>
