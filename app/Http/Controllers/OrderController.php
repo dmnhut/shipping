@@ -22,8 +22,12 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
-        $order = $this->order->store($data);
+        $order = $this->order->store($request);
         return $order;
+    }
+
+    public function get(){
+        $data = $this->order->index();
+        return $data;
     }
 }

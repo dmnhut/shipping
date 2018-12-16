@@ -24,8 +24,14 @@ Route::group(['prefix' => 'user'], function () {
 
 Route::group(['prefix' => 'order'], function () {
     Route::post('store', 'OrderController@store');
+    Route::get('list', 'OrderController@get');
 });
 
 Route::group(['prefix' => 'pay'], function () {
     Route::post('recharge', 'PayController@recharge');
+});
+
+Route::group(['prefix' => 'location'], function () {
+    Route::post('fetch', 'LocationController@storeOrUpdate');
+    Route::get('get', 'LocationController@getLocation');
 });

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -40,20 +41,51 @@ class Order extends Model
         return $result;
     }
 
-    public function store($data)
+    public function store(Request $request)
     {
-        $order = $this::create([
-            'code' => helpers::genCodeOrder(),
-            'title' => $data['title'],
-            'content' => $data['content'],
-            'price' => $data['price'],
-            'address_from' => $data['address_from'],
-            'address_to' => $data['address_to'],
-            'image' => $data['image'],
-            'status' => helpers::$STATUS_ORDER['INIT'],
-            'id_user' => $data['id_user'],
-            'id_user_ship' => null
-        ]);
+        $data = $request->all();
+        $image = $request->file('image');
+        $data['image'] = time() . '.' . $image->getClientOriginalExtension();
+        $destinationPath = public_path('/images');
+        $image->move($destinationPath, $data['image']);
+        $data['image'] = $destinationPath . '/' . $data['image'];
+        try {
+            $this::create([
+                'code' => helpers::genCodeOrder(),
+                'title' => $data['title'],
+                'content' => $data['content'],
+                'price' => $data['price'],
+                'address_from' => $data['address_from'],
+                'address_to' => $data['address_to'],
+                'image' => $data['image'],
+                'status' => helpers::$STATUS_ORDER['INIT'],
+                'id_user' => $data['id_user'],
+                'id_user_ship' => null
+            ]);
+            return [
+                'status' => true
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => false
+            ];
+        }
+    }
+
+    public function index()
+    {
+        $order = $this::where('status', '<>', helpers::$STATUS_ORDER['CANCEL'])
+            ->orderby('orders.created_at', 'desc')
+            ->get([
+                'code',
+                'title',
+                'image',
+                'price',
+                'content',
+                'address_from',
+                'address_to',
+                'created_at as date'
+            ]);
         return $order;
     }
 }

@@ -55,18 +55,21 @@ class UserController extends Controller
         if (empty($data)) {
             return [
                 'status' => false,
-                'message' => helpers::$MESSAGE_LOGIN[0]
+                'message' => helpers::$MESSAGE_LOGIN[0],
+                'user' => (object)helpers::$EMPTY_USER
             ];
         } else {
             if (Hash::check($input['password'], $data['password'])) {
                 return [
                     'status' => true,
-                    'data' => $data
+                    'message' => '',
+                    'user' => $data
                 ];
             } else {
                 return [
                     'status' => false,
-                    'message' => helpers::$MESSAGE_LOGIN[1]
+                    'message' => helpers::$MESSAGE_LOGIN[1],
+                    'user' => (object)helpers::$EMPTY_USER
                 ];
             }
         }

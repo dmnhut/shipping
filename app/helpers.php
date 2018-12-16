@@ -27,6 +27,18 @@ class helpers
         'TRACKING' => 5,
         'FINISHED' => 6
     ];
+    public static $EMPTY_USER = [
+        'id' => 0,
+        'name' => '',
+        'email' => '',
+        'phone' => '',
+        'nickname' => '',
+        'sex' => '',
+        'coins' => '',
+        'status' => 0,
+        'created_at' => '',
+        'updated_at' => ''
+    ];
     public static $COINS_INIT = 0;
     public static $COIN_PAY = ['RECHARGE' => 0, 'FEES' => 1, 'WAGE' => 2];
     public static $MESSAGE_LOGIN = [
